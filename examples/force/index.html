@@ -25,7 +25,7 @@
         	// initiate layout
             var $layout = $("#layout").layout({repulsion: 2, friction: 0.0002, dt: 40, allowDragging: true, scale: 1, defaultThreshold: 1, noise: 0.0005});
             // attach 'MaKleSoft' node to layout
-            var $centerNode = $("<div>MaKleSoft</div>").css({"font-size": "40pt", "color": "Red"}).node({charge: 1});
+            var $centerNode = $("<div>MaKleSoft (loading...)</div>").css({"font-size": "40pt", "color": "Red"}).node({charge: 1});
             // set 'MaKleSoft' node as center node
             $layout.layout("addNode", $centerNode).layout("setCenterNode", $centerNode);
             
@@ -49,6 +49,7 @@
 				url: "../../index.php",
 				data: {twitterhandle: "maklesoft", responseType: "json"},
 				success: function(response) {
+                    $centerNode.text("MaKleSoft");
 					console.log(response);
 					addTags(JSON.parse(response).tags);
 				},

@@ -20,12 +20,14 @@ The service will then request n_search * 100 tweets from the api.
 
 In order to find tags and weight them appropriately the service
 extracts information from the following data:
+
 - Tweet contents
 - Metadata from url entities (title, keywords, description)
 - Metadata from media entitites (title, keywords, description)
 
 In order to fine tune the tag weighting the following factors can
 be set in the index.php:
+
 - content weighting
 - url keyword weighting
 - url title weighting (set to 0 by default)
