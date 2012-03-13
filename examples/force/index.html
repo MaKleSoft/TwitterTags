@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Twitter Tags FORCE</title>
+	<link href="lib/jquery/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
+    <script src="lib/jquery/jquery-1.7.js" type="text/javascript"></script>
+    <script src="lib/jquery/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+    <script src="lib/fdl/fdlengine.js" type="text/javascript"></script>
+    <script src="lib/fdl/fdlui.js" type="text/javascript"></script>
+    <style type="text/css">
+		#layout {
+			width: 700px;
+			height: 700px;
+			margin: 20px auto;
+			border: solid 1px;
+			overflow: hidden;
+		}
+    </style>
+</head>
+<body class="flexbox">
+    <div class="flexbox" id="main">
+        <div id="layout"></div>
+    </div>    
+    <script type="text/javascript">
+        $(document).ready(function() {
+        	// initiate layout
+            var $layout = $("#layout").layout({repulsion: 2, friction: 0.0002, dt: 40, allowDragging: true, scale: 1, defaultThreshold: 1, noise: 0.0005});
+            // attach 'MaKleSoft' node to layout
+            var $centerNode = $("<div>MaKleSoft</div>").css({"font-size": "40pt", "color": "Red"}).node({charge: 1});
+            // set 'MaKleSoft' node as center node
+            $layout.layout("addNode", $centerNode).layout("setCenterNode", $centerNode);
+            
+            /**
+            * Add twitter tags to layout
+            */
+			function addTags(tags) {
+				var tag, $tag;
+				for (var i=0; i<tags.length; i++) {
+					tag = tags[i];
+                    $tag = $("<div></div>").text(tag.tag).css("font-size", (tag.weight * 3) + "pt").node({charge: tag.weight/10});
+                    $layout.layout("addNode", $tag);
+                    $layout.layout("addLink", {from: $centerNode.node("getId"), to: $tag.node("getId"), weight: tag.weight/20});
+                }
+                $layout.layout("run");
+			}
+			
+			// Make a request to TwitterTags service
+			$.ajax({
+				type: "GET",
+				url: "../../index.php",
+				data: {twitterhandle: "maklesoft", responseType: "json"},
+				success: function(response) {
+					console.log(response);
+					addTags(JSON.parse(response).tags);
+				},
+				error: function(response) {
+					console.error(JSON.stringify(response));
+				}
+			});
+        });
+        
+    </script>
+</body>
+</html>

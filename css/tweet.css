@@ -1,0 +1,53 @@
+﻿.vflexbox {
+    display:-moz-box;
+    display:-webkit-box;
+    display: box;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.hflexbox {
+    display:-moz-box;
+    display:-webkit-box;
+    display: box;
+    -moz-box-orient: horizontal;
+    -webkit-box-orient: horizontal;
+    box-orient: horizontal;
+}
+
+.floatwee-tweet {
+    width: 250px;
+    font-size: 10pt;
+    background-color: #eee;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0px;
+    border: solid 1px;
+}
+
+.floatwee-tweet-left {
+    padding: 5px;
+}
+
+.floatwee-tweet-right {
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+}
+
+.floatwee-tweet-author-name {
+    font-weight: bold;
+    padding: 5px;
+}
+
+.floatwee-tweet-author-image {
+    border-radius: 5px;
+}
+
+.floatwee-tweet-text {
+    padding: 0px 5px 10px 5px;
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+}
